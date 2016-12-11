@@ -14,13 +14,25 @@ import java.net.URISyntaxException;
  */
 public class JokeApiService {
 
-    public static String getJoke() throws URISyntaxException, JSONException, IOException {
+    private static JokeApiService INSTANCE;
+
+    private JokeApiService() {
+    }
+
+    public static JokeApiService getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new JokeApiService();
+        }
+        return INSTANCE;
+    }
+
+    public String getJoke() throws URISyntaxException, JSONException, IOException {
         URI uri = new URIBuilder("http://localhost:60001/api/random").build();
         JSONObject jObject = new JSONObject(execute(uri));
         return jObject.getString("facts");
     }
 
-    private static String execute(URI uri) throws IOException {
+    private String execute(URI uri) throws IOException {
         return Request.Get(uri).execute().returnContent().asString();
     }
 

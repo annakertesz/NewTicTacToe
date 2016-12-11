@@ -25,12 +25,14 @@ public class StateController {
         int userIndex = Integer.parseInt(place);
         state.set(userIndex, 'X');
         if (isWon('X')){
-            new ArrayList<>(Arrays.asList('X'));
+            state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
+            return new ArrayList<>(Arrays.asList('X'));
         }
         int computerIndex = getRecommendation(place);
         state.set(computerIndex, 'O');
         if (isWon('O')){
-            new ArrayList<>(Arrays.asList('O'));
+            state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
+            return new ArrayList<>(Arrays.asList('O'));
         }
         return state;
     }

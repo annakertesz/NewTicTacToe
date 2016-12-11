@@ -8,7 +8,6 @@ import spark.Response;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,13 +21,13 @@ public class TemplateEngineController {
     public static ModelAndView templateSelector(Request req, Response res) throws JSONException, IOException, URISyntaxException {
         String place = req.queryParams("place");
         ArrayList state = controller.getState(place);
-        if (state.equals(Arrays.asList('X'))){
+        if (state.get(0).equals('X')){
             return renderWon();
         }
-        if (state.equals(Arrays.asList('O'))){
+        if (state.get(0).equals('O')){
             return renderWon();
         }
-        if (state.equals(Arrays.asList('-'))){
+        if (state.get(0).equals('W')){
             return renderWon();
         }
         else {

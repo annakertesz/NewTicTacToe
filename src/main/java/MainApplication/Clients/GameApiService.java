@@ -16,6 +16,9 @@ public class GameApiService {
 
     private static GameApiService INSTANCE;
 
+    private GameApiService() {
+    }
+
     public static GameApiService getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new GameApiService();
