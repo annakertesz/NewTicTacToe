@@ -21,12 +21,6 @@ public class TemplateEngineController {
     public static ModelAndView templateSelector(Request req, Response res) throws JSONException, IOException, URISyntaxException {
         String place = req.queryParams("place");
         ArrayList state = controller.getState(place);
-        if (state.get(0).equals('X')){
-            return renderWon();
-        }
-        if (state.get(0).equals('O')){
-            return renderWon();
-        }
         if (state.get(0).equals('W')){
             return renderWon();
         }
@@ -43,7 +37,7 @@ public class TemplateEngineController {
     public static ModelAndView renderGame(ArrayList state) throws JSONException, IOException, URISyntaxException {
 
         Map params = new HashMap<>();
-//        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
+        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
         params.put("cat_fact", controller.tellJoke());
         params.put("state", state);
         return new ModelAndView(params, "game");
