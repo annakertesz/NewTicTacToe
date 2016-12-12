@@ -21,23 +21,38 @@ public class TemplateEngineController {
     public static ModelAndView templateSelector(Request req, Response res) throws JSONException, IOException, URISyntaxException {
         String place = req.queryParams("place");
         ArrayList state = controller.getState(place);
-        if (state.get(0).equals('U')){
-            return renderWon();
+        char message = (char) state.get(0);
+        switch (message) {
+            case StateController.USERWIN:
+                return renderWon();
+            case StateController.COMPUTERWIN:
+                return renderLoose();
+            case StateController.DRAW:
+                return renderDraw();
+            default:
+                return renderGame(state);
         }
-        else {
-            return renderGame(state);
-        }
+    }
+
+    private static ModelAndView renderDraw() {
+        Map params = new HashMap<>();
+        return new ModelAndView(params, "/pages/draw");
+    }
+
+    private static ModelAndView renderLoose() {
+        Map params = new HashMap<>();
+        return new ModelAndView(params, "/pages/looser");
     }
 
     public static ModelAndView renderWelcome(Request req, Response res){
         Map params = new HashMap<>();
         params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
-        return new ModelAndView(params, "welcome");
+        return new ModelAndView(params, "/pages/welcome");
     }
 
     public static ModelAndView renderWon(){
         Map params = new HashMap<>();
-        return new ModelAndView(params, "won");
+        return new ModelAndView(params, "/pages/congrat");
     }
 
     public static ModelAndView renderGame(ArrayList state) throws JSONException, IOException, URISyntaxException {
@@ -46,7 +61,7 @@ public class TemplateEngineController {
         params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
         params.put("cat_fact", controller.tellJoke());
         params.put("state", state);
-        return new ModelAndView(params, "game");
+        return new ModelAndView(params, "/pages/game");
     }
 
 }

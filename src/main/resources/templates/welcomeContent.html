@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="welcomeContent">
+        <div class="jumbotron">
+            <p>PUT SOME TEXT HERE</p>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <form action="/game" method="get">
+                    <input type="text" name="name"/>
+                    <input type="submit" value="Start game!"/>
+                </form>
+                <!--<a href="/game" class="btn btn-primary btn-lg btn-block">Start game!</a>-->
+            </div>
+        </div>
+    </div>
+</body>
+

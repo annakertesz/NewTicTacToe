@@ -20,10 +20,10 @@ public class GameController {
     private final char COMPUTER = 'O';
 
 //    game massages stored in integer
-    private final int ERROR = 13;
+    private final int DRAW = 10;
     private final int USERWIN = 11;
     private final int COMPUTERWIN = 12;
-    private final int DRAW = 10;
+    private final int ERROR = 13;
 
 
 
@@ -35,19 +35,26 @@ public class GameController {
     public String getAnswerInJSON(int place){
         JSONObject obj = new JSONObject();
         try {
-            obj.put("recommendation",  getState(place));
+            obj.put("recommendation",  getRecommendation(place));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return obj.toString();
     }
 
-    private int getState(int place){
+    private int getRecommendation(int place){
         String response;
         int recommendation = ERROR;
 
         step(place, USER);
-        if (isWon(USER)) return USERWIN;
+        if (isWon(USER)) {
+            newGame();
+            return USERWIN;
+        }
+        if (!state.contains("-")){
+            newGame();
+            return DRAW;
+        }
 
         try {
             response = apiService.getResponse(state);
@@ -63,14 +70,18 @@ public class GameController {
         }
         System.out.println("COMMENT - recommendation = " + recommendation);
         step(recommendation, 'O');
-        if (isWon(USER)) return 12;
+        System.out.println(state);
+        System.out.println("COMMENT" + isWon('O'));
+        if (isWon('O')) {
+            newGame();
+            return COMPUTERWIN;
+        }
         return recommendation;
     }
 
     private void step(int place, char player){
         String newState = state.substring(0,place)+player+state.substring(place+1);
         state = newState;
-        if (isWon(player)) newGame();
     }
 
     private boolean isWon(char player) {
