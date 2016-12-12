@@ -13,6 +13,16 @@ import java.util.Arrays;
  */
 public class StateController {
 
+    //    set players character here
+    private final char USER = 'X';
+    private final char COMPUTER = 'O';
+
+    //    game massages stored in character
+    protected final int ERROR = 'E';
+    protected final int USERWIN = 'U';
+    protected final int COMPUTERWIN = 'C';
+    protected final int DRAW = 'D';
+
     private final GameApiService apiService;
 
     private ArrayList state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
@@ -23,10 +33,10 @@ public class StateController {
 
     public ArrayList step(String place) throws IOException, JSONException, URISyntaxException {
         int userIndex = Integer.parseInt(place);
-        state.set(userIndex, 'X');
+        state.set(userIndex, USER);
         int computerIndex = getRecommendation(place);
-        if (computerIndex>9) return new ArrayList<>(Arrays.asList('W'));
-        state.set(computerIndex, 'O');
+        if (computerIndex>9) return new ArrayList<>(Arrays.asList(USERWIN));
+        state.set(computerIndex, COMPUTER);
         return state;
     }
 

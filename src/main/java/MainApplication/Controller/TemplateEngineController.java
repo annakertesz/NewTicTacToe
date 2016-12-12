@@ -21,7 +21,7 @@ public class TemplateEngineController {
     public static ModelAndView templateSelector(Request req, Response res) throws JSONException, IOException, URISyntaxException {
         String place = req.queryParams("place");
         ArrayList state = controller.getState(place);
-        if (state.get(0).equals('W')){
+        if (state.get(0).equals('U')){
             return renderWon();
         }
         else {

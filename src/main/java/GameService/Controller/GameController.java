@@ -15,6 +15,18 @@ public class GameController {
     private String state;
     private final ApiService apiService;
 
+//    set players character here
+    private final char USER = 'X';
+    private final char COMPUTER = 'O';
+
+//    game massages stored in integer
+    private final int ERROR = 13;
+    private final int USERWIN = 11;
+    private final int COMPUTERWIN = 12;
+    private final int DRAW = 10;
+
+
+
     public GameController(ApiService apiService) {
         this.apiService = apiService;
         this.state = "---------";
@@ -32,17 +44,15 @@ public class GameController {
 
     private int getState(int place){
         String response;
-        int recommendation = 13;
+        int recommendation = ERROR;
 
-        step(place, 'X');
-        if (isWon('X')) return 11;
+        step(place, USER);
+        if (isWon(USER)) return USERWIN;
 
         try {
             response = apiService.getResponse(state);
-            System.out.println("COMMENT - response = " + response);
             JSONObject jObject = null;
             jObject = new JSONObject(response);
-            recommendation = 0;
             recommendation = Integer.parseInt(jObject.getString("recommendation"));
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -53,7 +63,7 @@ public class GameController {
         }
         System.out.println("COMMENT - recommendation = " + recommendation);
         step(recommendation, 'O');
-        if (isWon('O')) return 12;
+        if (isWon(USER)) return 12;
         return recommendation;
     }
 
