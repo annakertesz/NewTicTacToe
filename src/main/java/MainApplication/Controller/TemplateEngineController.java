@@ -36,6 +36,12 @@ public class TemplateEngineController {
         }
     }
 
+    public static ModelAndView renderWelcome(Request req, Response res){
+        Map params = new HashMap<>();
+        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
+        return new ModelAndView(params, "welcome");
+    }
+
     public static ModelAndView renderWon(){
         Map params = new HashMap<>();
         return new ModelAndView(params, "won");
@@ -44,7 +50,7 @@ public class TemplateEngineController {
     public static ModelAndView renderGame(ArrayList state) throws JSONException, IOException, URISyntaxException {
 
         Map params = new HashMap<>();
-//        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
+        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
         params.put("cat_fact", controller.tellJoke());
         params.put("state", state);
         return new ModelAndView(params, "game");
