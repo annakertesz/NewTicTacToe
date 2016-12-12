@@ -14,11 +14,10 @@ import java.util.ArrayList;
 public class MainController {
 
     StateController stateController = new StateController(GameApiService.getInstance());
+    JokeApiService jokeApiService = JokeApiService.getInstance();
 
     public String tellJoke() throws URISyntaxException, IOException, JSONException {
-
-        return JokeApiService.getJoke();
-
+        return jokeApiService.getJoke();
     }
 
     public ArrayList getState(String place) throws IOException, URISyntaxException, JSONException {

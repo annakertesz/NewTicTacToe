@@ -11,9 +11,11 @@ import java.net.URISyntaxException;
 /**
  * Created by annakertesz on 12/4/16.
  */
+
 public class ApiService {
 
     private static ApiService INSTANCE;
+
 
     public static ApiService getInstance() {
         if (INSTANCE == null) {
@@ -21,6 +23,7 @@ public class ApiService {
         }
         return INSTANCE;
     }
+
 
     public String getResponse(String state) throws URISyntaxException, JSONException, IOException {
         URI uri = new URIBuilder("http://tttapi.herokuapp.com/api/v1/" + state + "/O").build();

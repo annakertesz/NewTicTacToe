@@ -22,71 +22,25 @@
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<div class="container">
-    <header class="media">
-        <div class="media-body">
-            <h1 class="media-heading">It's my own beautiful TicTacToe</h1>
-            <p class="lead">And yeah, this is cuter than yours, period!</p>
+        <div>
+            <table>
+                <tr>
+                    <td><a href="/game-place?place=0" th:text="${state[0]}">-</a></td>
+                    <td><a href="/game-place?place=1" th:text="${state[1]}">-</a></td>
+                    <td><a href="/game-place?place=2" th:text="${state[2]}">-</a></td>
+                </tr>
+                <tr>
+                    <td><a href="/game-place?place=3" th:text="${state[3]}">-</a></td>
+                    <td><a href="/game-place?place=4" th:text="${state[4]}">-</a></td>
+                    <td><a href="/game-place?place=5" th:text="${state[5]}">-</a></td>
+                </tr>
+                <tr>
+                    <td><a href="/game-place?place=6" th:text="${state[6]}">-</a></td>
+                    <td><a href="/game-place?place=7" th:text="${state[7]}">-</a></td>
+                    <td><a href="/game-place?place=8" th:text="${state[8]}">-</a></td>
+                </tr>
+            </table>
         </div>
-        <div class="media-right">
-            <span class="media-heading">Profile</span>
-            <!--<img class="media-object" th:src="${avatar_url}" alt="avatar"/>-->
-        </div>
-    </header>
-
-    <!--<p class="lead" th:text="${timer}"></p>-->
-    <!--<p class="lead" th:text="${millitimer}"></p>-->
-    <p class="lead">{some quotes from Chuck Norris}</p>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-            <div class="container-fluid game-container">
-                <div class="row">
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=0" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=3" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=4" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=5" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=6" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=7" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                    <div class="col-xs-4">
-                        <a href="/game-place?place=8" class="btn btn-default square">&nbsp;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <!--<img th:src="${comic_url}" alt="Comic placeholder"/>-->
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- Latest compiled and minified Jquery -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
