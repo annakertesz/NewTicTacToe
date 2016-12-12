@@ -16,6 +16,9 @@ public class GameApiService {
 
     private static GameApiService INSTANCE;
 
+    private GameApiService() {
+    }
+
     public static GameApiService getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new GameApiService();
@@ -23,14 +26,14 @@ public class GameApiService {
         return INSTANCE;
     }
 
-    public static String getState(String place) throws IOException, URISyntaxException, JSONException {
+    public int getState(String place) throws IOException, URISyntaxException, JSONException {
         System.out.println("COMMENT - " + place);
         URI uri = new URIBuilder("http://localhost:60000/api/state?place=" + place).build();
         JSONObject jObject = new JSONObject(execute(uri));
-        return jObject.getString("recommendation");
+        return Integer.parseInt(jObject.getString("recommendation"));
     }
 
-    private static String execute(URI uri) throws IOException, URISyntaxException {
+    private String execute(URI uri) throws IOException, URISyntaxException {
         return Request.Get(uri).execute().returnContent().asString();
     }
 
