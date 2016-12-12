@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="header">
+    <header class="media">
+        <div class="media-body">
+            <h1 class="media-heading">The most awesome TicTacToe in the World</h1>
+            <p class="lead">Yeah, this is really the best version of TicTacToe, period!</p>
+        </div>
+        <div class="media-right">
+            <span class="media-heading">Profile</span>
+            <img class="media-object" th:src="${avatar_url}" alt="avatar"/>
+        </div>
+    </header>
+</div>
+</body>
+</html>
