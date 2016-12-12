@@ -33,7 +33,7 @@ public class Server {
 //            return MainController.TellJoke();
 //        });
 
-        get("/", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
+        get("/", TemplateEngineController::renderWelcome, new ThymeleafTemplateEngine());
         get("/game-place", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
 
     }
