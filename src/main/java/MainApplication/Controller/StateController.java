@@ -18,10 +18,10 @@ public class StateController {
     private final char COMPUTER = 'O';
 
     //    game massages stored in character
-    protected final int ERROR = 'E';
-    protected final int USERWIN = 'U';
-    protected final int COMPUTERWIN = 'C';
-    protected final int DRAW = 'D';
+    protected static final char ERROR = 'E';
+    public static final char USERWIN = 'U';
+    protected static final char COMPUTERWIN = 'C';
+    protected static final char DRAW = 'D';
 
     private final GameApiService apiService;
 
@@ -35,13 +35,27 @@ public class StateController {
         int userIndex = Integer.parseInt(place);
         state.set(userIndex, USER);
         int computerIndex = getRecommendation(place);
-        if (computerIndex>9) return new ArrayList<>(Arrays.asList(USERWIN));
-        state.set(computerIndex, COMPUTER);
-        return state;
+        return messageCoder(computerIndex);
     }
 
     private int getRecommendation(String place) throws JSONException, IOException, URISyntaxException {
         return apiService.getState(place);
+    }
+
+    private ArrayList messageCoder(int code){
+        switch (code){
+            case 10: return send(DRAW);
+            case 11: return send(USERWIN);
+            case 12: return send(COMPUTERWIN);
+            case 13: return send(ERROR);
+            default: state.set(code, COMPUTER);
+                return state;
+        }
+    }
+
+    private ArrayList send(char message){
+        state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
+        return new ArrayList<>(Arrays.asList(message));
     }
 
 }

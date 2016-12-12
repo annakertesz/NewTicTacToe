@@ -2,6 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="board">
+    <h1 th:text="${state}">bla</h1>
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
             <div class="container-fluid game-container">
@@ -13,13 +14,13 @@
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[1]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=1" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[2]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=2" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
@@ -27,19 +28,19 @@
 
                 <div class="row">
                     <div class="col-xs-4" th:switch="${state[3]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=3" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[4]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=4" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[5]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=5" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
@@ -47,19 +48,19 @@
 
                 <div class="row">
                     <div class="col-xs-4" th:switch="${state[6]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=6" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[7]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=7" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
 
                     <div class="col-xs-4" th:switch="${state[8]}">
-                        <a th:case="'.'" href="/game-place?place=0" class="btn btn-default square"></a>
+                        <a th:case="'.'" href="/game-place?place=8" class="btn btn-default square"></a>
                         <i  th:case="'X'" class="btn btn-default square fa fa-times" aria-hidden="true"></i>
                         <i  th:case="'O'" class="btn btn-default square fa fa-circle-o" aria-hidden="true"></i>
                     </div>
