@@ -29,7 +29,8 @@ public class JokeApiService {
     public String getJoke() throws URISyntaxException, JSONException, IOException {
         URI uri = new URIBuilder("http://localhost:60001/api/random").build();
         JSONObject jObject = new JSONObject(execute(uri));
-        return jObject.getString("facts");
+        String joke = jObject.getString("facts");
+        return joke.substring(2, joke.length()-2);
     }
 
     private String execute(URI uri) throws IOException {

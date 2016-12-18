@@ -13,6 +13,19 @@ import java.net.URISyntaxException;
  */
 public class ApiService {
 
+    private static ApiService INSTANCE;
+
+    public ApiService() {
+    }
+
+
+    public static ApiService getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ApiService();
+        }
+        return INSTANCE;
+    }
+
     public static String getJoke() throws URISyntaxException, JSONException, IOException {
         URI uri = new URIBuilder("http://catfacts-api.appspot.com/api/facts").build();
 //        JSONObject jObject = new JSONObject(execute(uri));

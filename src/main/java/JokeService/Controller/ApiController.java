@@ -11,7 +11,13 @@ import java.net.URISyntaxException;
  */
 public class ApiController {
 
-    public static String getCatFact() throws IOException, JSONException, URISyntaxException {
+    private final ApiService apiService;
+
+    public ApiController(ApiService apiService) {
+        this.apiService = apiService;
+    }
+
+    public String getCatFact() throws IOException, JSONException, URISyntaxException {
         return ApiService.getJoke();
     }
 

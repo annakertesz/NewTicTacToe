@@ -1,5 +1,6 @@
 package JokeService;
 
+import JokeService.Client.ApiService;
 import JokeService.Controller.ApiController;
 
 import static spark.Spark.get;
@@ -10,11 +11,17 @@ import static spark.Spark.port;
  */
 public class JokeServer {
 
+    private ApiController controller;
+
     public static void main(String[] args) {
         setup(args);
 
+        JokeServer application = new JokeServer();
+
+        application.controller = new ApiController(ApiService.getInstance());
+
         get("/api/random", (request, response) -> {
-            return ApiController.getCatFact();
+            return application.controller.getCatFact();
         });
     }
 
