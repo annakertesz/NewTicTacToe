@@ -44,8 +44,9 @@ public class TemplateEngineController {
         return new ModelAndView(params, "/pages/looser");
     }
 
-    public static ModelAndView renderWelcome(Request req, Response res){
+    public static ModelAndView renderWelcome(Request req, Response res) throws IOException, JSONException, URISyntaxException {
         Map params = new HashMap<>();
+        params.put("greeting", controller.getGreeting());
         params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
         return new ModelAndView(params, "/pages/welcome");
     }

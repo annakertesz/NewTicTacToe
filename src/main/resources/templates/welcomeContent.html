@@ -3,7 +3,7 @@
 <body>
     <div th:fragment="welcomeContent">
         <div class="jumbotron">
-            <p>PUT SOME TEXT HERE</p>
+            <p th:text="${greeting}">PUT SOME TEXT HERE</p>
         </div>
 
         <div class="row">
@@ -18,3 +18,4 @@
     </div>
 </body>
 
+</html>
