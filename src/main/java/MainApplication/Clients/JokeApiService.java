@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 /**
  * Created by annakertesz on 12/4/16.
  */
-public class JokeApiService {
+public class JokeApiService  {
 
     private static JokeApiService INSTANCE;
 

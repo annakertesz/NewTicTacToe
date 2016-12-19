@@ -22,7 +22,7 @@ public class MainController {
         return jokeApiService.getJoke();
     }
 
-    public ArrayList getState(String place) throws IOException, URISyntaxException, JSONException {
+    public ArrayList getState(String place) throws IOException, URISyntaxException, JSONException{
         return stateController.step(place);
     }
 

@@ -31,7 +31,7 @@ public class StateController {
         this.apiService = apiService;
     }
 
-    public ArrayList step(String place) throws IOException, JSONException, URISyntaxException {
+    public ArrayList step(String place) throws IOException, JSONException, URISyntaxException{
         int userIndex = Integer.parseInt(place);
         state.set(userIndex, USER);
         int computerIndex = getRecommendation(place);
