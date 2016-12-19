@@ -16,8 +16,6 @@ public class GameApiService {
 
     private static GameApiService INSTANCE;
 
-
-
     private GameApiService() {
     }
 

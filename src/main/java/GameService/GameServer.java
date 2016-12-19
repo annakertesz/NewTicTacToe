@@ -25,7 +25,6 @@ public class GameServer {
         get("/api/state", (request, response) -> {
             int place = Integer.parseInt(request.queryParams("place"));
             String answerInJSON = application.controller.getAnswerInJSON(place);
-            System.out.println("COMMENT - answer: " + answerInJSON);
             return answerInJSON;
         });
     }

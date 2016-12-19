@@ -34,7 +34,10 @@ public class Server {
 //        });
 
         get("/", TemplateEngineController::renderWelcome, new ThymeleafTemplateEngine());
+        get("/game", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
         get("/game-place", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
 
     }
+
+
 }
