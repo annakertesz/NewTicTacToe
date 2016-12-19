@@ -10,27 +10,28 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Created by annakertesz on 12/4/16.
+ * Created by annakertesz on 12/18/16.
  */
-public class GameApiService {
+public class GreetingApiService {
 
-    private static GameApiService INSTANCE;
+    private static GreetingApiService INSTANCE;
 
-    private GameApiService() {
+
+
+    private GreetingApiService() {
     }
 
-    public static GameApiService getInstance() {
+    public static GreetingApiService getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new GameApiService();
+            INSTANCE = new GreetingApiService();
         }
         return INSTANCE;
     }
 
-    public int getState(String place) throws IOException, URISyntaxException, JSONException {
-        System.out.println("COMMENT - " + place);
-        URI uri = new URIBuilder("http://localhost:60000/api/state?place=" + place).build();
+    public String getGreeting() throws IOException, URISyntaxException, JSONException {
+        URI uri = new URIBuilder("http://localhost:60003/api/greeting").build();
         JSONObject jObject = new JSONObject(execute(uri));
-        return Integer.parseInt(jObject.getString("recommendation"));
+        return jObject.getString("body");
     }
 
     private String execute(URI uri) throws IOException, URISyntaxException {
@@ -38,3 +39,6 @@ public class GameApiService {
     }
 
 }
+
+
+

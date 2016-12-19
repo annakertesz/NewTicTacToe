@@ -13,6 +13,16 @@ import java.util.Arrays;
  */
 public class StateController {
 
+    //    set players character here
+    private final char USER = 'X';
+    private final char COMPUTER = 'O';
+
+    //    game massages stored in character
+    protected static final char ERROR = 'E';
+    public static final char USERWIN = 'U';
+    protected static final char COMPUTERWIN = 'C';
+    protected static final char DRAW = 'D';
+
     private final GameApiService apiService;
 
     private ArrayList state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
@@ -21,42 +31,31 @@ public class StateController {
         this.apiService = apiService;
     }
 
-    public ArrayList step(String place) throws IOException, JSONException, URISyntaxException {
+    public ArrayList step(String place) throws IOException, JSONException, URISyntaxException{
         int userIndex = Integer.parseInt(place);
-        state.set(userIndex, 'X');
-        if (isWon('X')){
-            new ArrayList<>(Arrays.asList('X'));
-        }
+        state.set(userIndex, USER);
         int computerIndex = getRecommendation(place);
-        state.set(computerIndex, 'O');
-        if (isWon('O')){
-            new ArrayList<>(Arrays.asList('O'));
-        }
-        return state;
-    }
-
-    private boolean isWon(char player) {
-        return horizontal(player) || vertical(player) || diagonal(player);
-    }
-
-    private boolean horizontal(char player){
-        return isFull(0, 3, player) || isFull(1, 3, player) || isFull(2, 3, player);
-    }
-
-    private boolean vertical(char player){
-        return isFull(0, 1, player) || isFull(3, 1, player) || isFull(6, 1, player);
-    }
-
-    private boolean diagonal(char player){
-        return isFull(0, 4, player) || isFull(2, 2, player);
-    }
-
-    private boolean isFull(int i, int dif, char player){
-        return state.get(i).equals(player) && state.get(i+dif).equals(player) && state.get(i+2*dif).equals(player);
+        return messageCoder(computerIndex);
     }
 
     private int getRecommendation(String place) throws JSONException, IOException, URISyntaxException {
-        return Integer.parseInt(GameApiService.getState(place));
+        return apiService.getState(place);
+    }
+
+    private ArrayList messageCoder(int code){
+        switch (code){
+            case 10: return send(DRAW);
+            case 11: return send(USERWIN);
+            case 12: return send(COMPUTERWIN);
+            case 13: return send(ERROR);
+            default: state.set(code, COMPUTER);
+                return state;
+        }
+    }
+
+    private ArrayList send(char message){
+        state = new ArrayList<>(Arrays.asList('.', '.','.', '.' , '.', '.', '.', '.','.'));
+        return new ArrayList<>(Arrays.asList(message));
     }
 
 }

@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="welcomeContent">
+        <div class="jumbotron">
+            <p th:text="${greeting}">PUT SOME TEXT HERE</p>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <a href="/game-place?place=4" class = "btn">START</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

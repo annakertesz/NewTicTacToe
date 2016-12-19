@@ -8,7 +8,6 @@ import spark.Response;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,32 +21,55 @@ public class TemplateEngineController {
     public static ModelAndView templateSelector(Request req, Response res) throws JSONException, IOException, URISyntaxException {
         String place = req.queryParams("place");
         ArrayList state = controller.getState(place);
-        if (state.equals(Arrays.asList('X'))){
-            return renderWon();
-        }
-        if (state.equals(Arrays.asList('O'))){
-            return renderWon();
-        }
-        if (state.equals(Arrays.asList('-'))){
-            return renderWon();
-        }
-        else {
-            return renderGame(state);
+        char message = (char) state.get(0);
+        switch (message) {
+            case StateController.USERWIN:
+                return renderWon(req);
+            case StateController.COMPUTERWIN:
+                return renderLoose(req);
+            case StateController.DRAW:
+                return renderDraw(req);
+            default:
+                return renderGame(state, req);
         }
     }
 
-    public static ModelAndView renderWon(){
+    private static ModelAndView renderDraw(Request req) throws IOException, JSONException, URISyntaxException {
         Map params = new HashMap<>();
-        return new ModelAndView(params, "won");
+        params.put("gratulation", controller.getCatUrl());
+        params.put("avatar_url", controller.getAvatarUrl(req.session().id()));
+        return new ModelAndView(params, "/pages/draw");
     }
 
-    public static ModelAndView renderGame(ArrayList state) throws JSONException, IOException, URISyntaxException {
+    private static ModelAndView renderLoose(Request req) throws IOException, JSONException, URISyntaxException {
+        Map params = new HashMap<>();
+        params.put("gratulation", controller.getCatUrl());
+        params.put("avatar_url", controller.getAvatarUrl(req.session().id()));
+        return new ModelAndView(params, "/pages/looser");
+    }
+
+    public static ModelAndView renderWelcome(Request req, Response res) throws IOException, JSONException, URISyntaxException {
+        Map params = new HashMap<>();
+        params.put("greeting", controller.getGreeting());
+        params.put("avatar_url", controller.getAvatarUrl(req.session().id()));
+        return new ModelAndView(params, "/pages/welcome");
+    }
+
+    public static ModelAndView renderWon(Request req) throws IOException, JSONException, URISyntaxException {
+        Map params = new HashMap<>();
+        params.put("gratulation", controller.getCatUrl());
+        params.put("avatar_url", controller.getAvatarUrl(req.session().id()));
+        return new ModelAndView(params, "/pages/congrat");
+    }
+
+    public static ModelAndView renderGame(ArrayList state, Request req) throws JSONException, IOException, URISyntaxException {
 
         Map params = new HashMap<>();
-//        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
+        params.put("avatar_url", "http://thecatapi.com/api/images/get?format=src&type=gif");
         params.put("cat_fact", controller.tellJoke());
         params.put("state", state);
-        return new ModelAndView(params, "game");
+        params.put("avatar_url", controller.getAvatarUrl(req.session().id()));
+        return new ModelAndView(params, "/pages/game");
     }
 
 }

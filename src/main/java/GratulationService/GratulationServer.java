@@ -1,28 +1,29 @@
-package JokeService;
+package GratulationService;
 
-import JokeService.Client.ApiService;
-import JokeService.Controller.ApiController;
+import GratulationService.Client.ApiService;
+import GratulationService.Controller.ApiController;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 /**
- * Created by annakertesz on 12/4/16.
+ * Created by annakertesz on 12/18/16.
  */
-public class JokeServer {
+public class GratulationServer {
 
     private ApiController controller;
 
     public static void main(String[] args) {
-        setup(args);
 
-        JokeServer application = new JokeServer();
+        GratulationServer application = new GratulationServer();
 
         application.controller = new ApiController(ApiService.getInstance());
 
-        get("/api/random", (request, response) -> {
-            return application.controller.getCatFact();
-        });
+        setup(args);
+
+        // --- MAPPINGS ---
+
+        get("/api/gratulation", application.controller::getCatUrl);
     }
 
     private static void setup(String[] args){

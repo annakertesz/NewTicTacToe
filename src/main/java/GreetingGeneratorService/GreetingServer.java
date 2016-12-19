@@ -1,28 +1,28 @@
-package JokeService;
+package GreetingGeneratorService;
 
-import JokeService.Client.ApiService;
-import JokeService.Controller.ApiController;
+import GreetingGeneratorService.Client.ApiService;
+import GreetingGeneratorService.Controller.ApiController;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 /**
- * Created by annakertesz on 12/4/16.
+ * Created by annakertesz on 12/18/16.
  */
-public class JokeServer {
-
+public class GreetingServer {
     private ApiController controller;
 
     public static void main(String[] args) {
-        setup(args);
 
-        JokeServer application = new JokeServer();
+        GreetingServer application = new GreetingServer();
 
         application.controller = new ApiController(ApiService.getInstance());
 
-        get("/api/random", (request, response) -> {
-            return application.controller.getCatFact();
-        });
+        setup(args);
+
+        // --- MAPPINGS ---
+
+        get("/api/greeting", application.controller::random);
     }
 
     private static void setup(String[] args){
@@ -36,5 +36,4 @@ public class JokeServer {
             System.exit(-1);
         }
     }
-
 }

@@ -1,28 +1,29 @@
-package JokeService;
+package AvatarService;
 
-import JokeService.Client.ApiService;
-import JokeService.Controller.ApiController;
+import AvatarService.Client.ApiService;
+import AvatarService.Controller.ApiController;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
 
 /**
- * Created by annakertesz on 12/4/16.
+ * Created by annakertesz on 12/18/16.
  */
-public class JokeServer {
+public class AvatarServer {
 
     private ApiController controller;
 
     public static void main(String[] args) {
-        setup(args);
 
-        JokeServer application = new JokeServer();
+        AvatarServer application = new AvatarServer();
 
         application.controller = new ApiController(ApiService.getInstance());
 
-        get("/api/random", (request, response) -> {
-            return application.controller.getCatFact();
-        });
+        setup(args);
+
+        // --- MAPPINGS ---
+
+        get("/api/avatar/:id", application.controller::getAvatarUrl);
     }
 
     private static void setup(String[] args){
@@ -36,5 +37,4 @@ public class JokeServer {
             System.exit(-1);
         }
     }
-
 }

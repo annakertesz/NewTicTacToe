@@ -21,10 +21,11 @@ public class GameServer {
         GameServer application = new GameServer();
         application.controller = new GameController(ApiService.getInstance());
 
+
         get("/api/state", (request, response) -> {
             int place = Integer.parseInt(request.queryParams("place"));
-            System.out.println("COMMENT - final return = " + application.controller.getState(place));
-            return application.controller.getState(place);
+            String answerInJSON = application.controller.getAnswerInJSON(place);
+            return answerInJSON;
         });
     }
 

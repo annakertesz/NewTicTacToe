@@ -2,10 +2,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <body>
-<div th:fragment="won">
-
-    <h1>YOU WON!</h1>
-    <img class="media-object" th:src="${gratulation}" />
+<div th:fragment="draw">
+    <h1>BOORING!!</h1>
+    <img class="media-object" th:src="${gratulation}"/>
+    <p th:text="${base_layer}">RECEPT</p>
     <a href="/game-place?place=1">Start new game</a>
 </div>
 

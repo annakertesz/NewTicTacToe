@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.net.URISyntaxException;
+
 import static spark.Spark.*;
 import static spark.Spark.get;
 
@@ -20,6 +22,12 @@ public class Server {
         logger.debug("Starting server...");
 
         // --- EXCEPTION HANDLING ---
+        exception(URISyntaxException.class, (exception, request, response) -> {
+            response.status(500);
+            response.body(String.format("URI building error, maybe wrong format? : %s", exception.getMessage()));
+            logger.error("Error while processing request", exception);
+        });
+
         exception(Exception.class, (exception, request, response) -> {
             response.status(500);
             response.body(String.format("Unexpected error occurred: %s", exception.getMessage()));
@@ -29,12 +37,11 @@ public class Server {
         staticFileLocation("/public");
         port(PORT);
 
-//        get("/", (request, response) -> {
-//            return MainController.TellJoke();
-//        });
 
-        get("/", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
+        get("/", TemplateEngineController::renderWelcome, new ThymeleafTemplateEngine());
         get("/game-place", TemplateEngineController::templateSelector, new ThymeleafTemplateEngine());
 
     }
+
+
 }
